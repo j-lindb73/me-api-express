@@ -7,7 +7,8 @@ const bodyParser = require("body-parser");
 // import routes
 const index = require('./routes/index');
 const hello = require('./routes/hello');
-const user = require('./routes/user');
+const register = require('./routes/register');
+const login = require('./routes/login');
 const reports = require('./routes/reports');
 
 app.use(bodyParser.json()); // for parsing application/json
@@ -28,6 +29,8 @@ if (process.env.NODE_ENV !== 'test') {
 app.use((req, res, next) => {
     console.log(req.method);
     console.log(req.path);
+    // console.log(req.body);
+    
     next();
 });
 
@@ -35,8 +38,9 @@ app.use((req, res, next) => {
 // Add routes
 app.use('/', index);
 app.use('/hello', hello);
-app.use('/user', user);
+app.use('/register', register);
 app.use('/reports', reports);
+app.use('/login', login);
 
 
 // Add routes for 404 and error handling

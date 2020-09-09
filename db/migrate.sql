@@ -6,5 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS reports (
     week INT,
-    text TEXT
+    text TEXT,
+    UNIQUE(week)
 );
