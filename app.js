@@ -28,7 +28,6 @@ if (process.env.NODE_ENV !== 'test') {
 app.use((req, res, next) => {
     console.log(req.method);
     console.log(req.path);
-    // console.log(req.body);
     
     next();
 });
@@ -64,6 +63,7 @@ app.use((err, req, res, next) => {
             }
         ]
     });
+    return undefined;
 });
 
 // Start up server
