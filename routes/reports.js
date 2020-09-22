@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 
 // const data = require('../models/texts');
-const texts = require('../models/texts');
+// const texts = require('../models/texts');
 const db = require('../db/database');
 const auth = require('../models/auth');
 
 router.get('/week/:kmom', function(req, res) {
-
     let sql = `SELECT week, text FROM reports WHERE week = ?;`;
 
     db.each(sql, req.params.kmom, function(err, row) {
@@ -15,12 +14,12 @@ router.get('/week/:kmom', function(req, res) {
         if (err) {
             return res.status(500).json({
                 errors: {
-                status: 500,
-                source: "GET /reports",
-                title: "Database error",
-                detail: err.message
-                    }
-                })
+                    status: 500,
+                    source: "GET /reports",
+                    title: "Database error",
+                    detail: err.message
+                }
+            });
         }
         const data = {
             data: {
@@ -28,6 +27,7 @@ router.get('/week/:kmom', function(req, res) {
                 text: row.text
             }
         };
+
         // console.log(data);
         res.json(data);
     });
@@ -55,7 +55,7 @@ function report(res, body, edit = false) {
 
     if (edit) {
         sql = "UPDATE reports SET text = ? WHERE week = ?;";
-    }else{
+    } else {
         sql = "INSERT INTO reports (text, week) VALUES(?, ?);";
     }
 
@@ -65,12 +65,12 @@ function report(res, body, edit = false) {
                 // console.log(err);
                 return res.status(500).json({
                     errors: {
-                    status: 500,
-                    source: "GET /reports",
-                    title: "Database error",
-                    detail: err.message
-                        }
-                    })
+                        status: 500,
+                        source: "GET /reports",
+                        title: "Database error",
+                        detail: err.message
+                    }
+                });
             }
 
             return res.status(201).json({
@@ -91,12 +91,12 @@ function reportDelete(res, body) {
                 // console.log(err);
                 return res.status(500).json({
                     errors: {
-                    status: 500,
-                    source: "GET /reports",
-                    title: "Database error",
-                    detail: err.message
-                        }
-                    })
+                        status: 500,
+                        source: "GET /reports",
+                        title: "Database error",
+                        detail: err.message
+                    }
+                });
             }
 
             return res.status(201).json({
@@ -105,6 +105,5 @@ function reportDelete(res, body) {
                 }
             });
         });
-
 }
-module.exports = router; 
+module.exports = router;

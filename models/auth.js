@@ -17,20 +17,18 @@ const jwtSecret = process.env.JWT_SECRET || config.secret;
 
 const auth = {
     register_old: function(res, body) {
-
         let sql = "INSERT INTO users (email, password) VALUES (?, ?);";
 
         db.run(sql, body.email, body.password, function(err) {
-
             if (err) {
                 return res.status(500).json({
                     errors: {
-                    status: 500,
-                    source: "POST /user",
-                    title: "Database error",
-                    detail: err.message
-                        }
-                    })
+                        status: 500,
+                        source: "POST /user",
+                        title: "Database error",
+                        detail: err.message
+                    }
+                });
             }
 
             res.status(201).json({
@@ -38,7 +36,7 @@ const auth = {
                     msg: "Got a POST request, sending back 201 Created"
                 }
             });
-        })
+        });
     },
     register: function(res, body) {
         const email = body.email;
@@ -150,7 +148,7 @@ const auth = {
                         let payload = { email: user.email };
                         let jwtToken = jwt.sign(payload, jwtSecret, { expiresIn: '24h' });
 
-                        return res.json({
+                        return res.status(200).json({
                             data: {
                                 type: "success",
                                 message: "User logged in",
@@ -173,11 +171,12 @@ const auth = {
     },
     checkToken: function(req, res, next) {
         var token = req.headers['x-access-token'];
+
         console.log("Här kommer token: ");
         console.log(token);
 
         if (token) {
-            jwt.verify(token, jwtSecret, function(err, decoded) {
+            jwt.verify(token, jwtSecret, function(err) {
                 if (err) {
                     return res.status(500).json({
                         errors: {
@@ -210,7 +209,7 @@ const auth = {
         }
     }
 
-}
+};
 
 
 

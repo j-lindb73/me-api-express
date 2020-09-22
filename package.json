@@ -6,8 +6,10 @@
   "scripts": {
     "pretest": "bash db/reset_test_db.bash",
     "test": "nyc --reporter=html --reporter=text --reporter=clover mocha 'test/test.js'",
+    "posttest": "npm run eslint",
     "start": "nodemon app.js",
-    "production": "NODE_ENV='production' node app.js"
+    "production": "NODE_ENV='production' node app.js",
+    "eslint": "eslint ."
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +24,9 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "eslint": "^7.9.0",
+    "eslint-plugin-react": "^7.20.6",
+    "javascript-style-guide": "^1.0.1",
     "mocha": "^8.1.3",
     "nyc": "^15.1.0"
   }

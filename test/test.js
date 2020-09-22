@@ -1,11 +1,13 @@
+/* eslint-env mocha */
+
 process.env.NODE_ENV = 'test';
 
 //Require the dev-dependencies
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app.js');
-const db = require("../db/database.js");
-const { before } = require('mocha');
+// const db = require("../db/database.js");
+// const { before } = require('mocha');
 
 chai.should();
 
@@ -61,7 +63,7 @@ describe('app', () => {
                 email: "test@test.se",
                 password: "test123"
             };
-            
+
             chai.request(server)
                 .post("/register")
                 .send(user)
@@ -69,7 +71,8 @@ describe('app', () => {
                     res.should.have.status(201);
                     done();
                 });
-        })
+        });
+
         it('POST register new user shold not work (no email)', (done) => {
             let user= {
                 // email: "test@test.se",
@@ -83,7 +86,8 @@ describe('app', () => {
                     res.should.have.status(401);
                     done();
                 });
-        })
+        });
+
         it('POST login user should work', (done) => {
             let user= {
                 email: "test@test.se",
@@ -97,14 +101,14 @@ describe('app', () => {
                     res.should.have.status(200);
                     done();
                 });
-        })
+        });
     });
     describe('DELETE', () => {
         it('DELETE registered user should work', (done) => {
             let user= {
                 email: "test@test.se"
             };
-            
+
             chai.request(server)
                 .delete("/register")
                 .send(user)
@@ -112,7 +116,6 @@ describe('app', () => {
                     res.should.have.status(204);
                     done();
                 });
-        })
-
+        });
     });
 });

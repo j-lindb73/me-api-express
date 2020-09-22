@@ -28,7 +28,6 @@ if (process.env.NODE_ENV !== 'test') {
 app.use((req, res, next) => {
     console.log(req.method);
     console.log(req.path);
-    
     next();
 });
 
@@ -45,6 +44,7 @@ app.use('/login', login);
 // Put this last
 app.use((req, res, next) => {
     var err = new Error("Not Found");
+
     err.status = 404;
     next(err);
 });
