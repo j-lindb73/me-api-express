@@ -21,35 +21,6 @@ router.post("/", (req, res, next) => {
 });
 
 
-router.post("/old", (req, res, next) => {
-
-    let sql = "INSERT INTO users (email, password) VALUES (?, ?);";
-
-    db.run(sql, req.body.email, req.body.password, function(err) {
-
-        if (err) {
-            return res.status(500).json({
-                errors: {
-                status: 500,
-                source: "POST /user",
-                title: "Database error",
-                detail: err.message
-                    }
-                })
-        }
-
-        res.status(201).json({
-            data: {
-                msg: "Got a POST request, sending back 201 Created"
-            }
-        });
-    })
-});
-
-router.put("/", (req, res, next) => {
-    // PUT requests should return 204 No Content
-    res.status(204).send();
-});
 
 router.delete("/", (req, res, next) => {
     let sql = "DELETE FROM users WHERE email = ?;";

@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 
 // import routes
 const index = require('./routes/index');
-const hello = require('./routes/hello');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const reports = require('./routes/reports');
@@ -37,7 +36,6 @@ app.use((req, res, next) => {
 
 // Add routes
 app.use('/', index);
-app.use('/hello', hello);
 app.use('/register', register);
 app.use('/reports', reports);
 app.use('/login', login);
@@ -69,4 +67,6 @@ app.use((err, req, res, next) => {
 });
 
 // Start up server
-app.listen(port, () => console.log(`Example API listening on port ${port}!`));
+const server = app.listen(port, () => console.log(`Example API listening on port ${port}!`));
+
+module.exports = server;
