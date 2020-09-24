@@ -172,8 +172,8 @@ const auth = {
     checkToken: function(req, res, next) {
         var token = req.headers['x-access-token'];
 
-        console.log("Här kommer token: ");
-        console.log(token);
+        // console.log("Här kommer token: ");
+        // console.log(token);
 
         if (token) {
             jwt.verify(token, jwtSecret, function(err) {

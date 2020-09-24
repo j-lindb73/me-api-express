@@ -9,11 +9,14 @@ const server = require('../app.js');
 // const db = require("../db/database.js");
 // const { before } = require('mocha');
 
+
+let token = "";
+
 chai.should();
 
 chai.use(chaiHttp);
 
-describe('app', () => {
+describe('Testing of ME-API', () => {
     // before(() => {
     //     return new Promise((resolve) => {
 
@@ -94,15 +97,51 @@ describe('app', () => {
                 password: "test123"
             };
 
+
             chai.request(server)
                 .post("/login")
                 .send(user)
                 .end((err, res) => {
                     res.should.have.status(200);
+                    token = res.body.data.token;
+                    // console.log(token);
+                    done();
+                });
+        });
+        it('POST register report should work (token)', (done) => {
+            chai.request(server)
+                .post("/reports")
+                .set('Content-Type', 'application/json')
+                .set('x-access-token', token)
+                .send(JSON.stringify({
+                    week: 1,
+                    text: "Report 1"
+                }))
+                .end((err, res) => {
+                    res.should.have.status(201);
                     done();
                 });
         });
     });
+
+    describe('PUT', () => {
+        it('PUT edit report should work (token)', (done) => {
+            chai.request(server)
+                .put("/reports")
+                .set('Content-Type', 'application/json')
+                .set('x-access-token', token)
+                .send(JSON.stringify({
+                    week: 1,
+                    text: "Report 1 (edited)"
+                }))
+                .end((err, res) => {
+                    res.should.have.status(201);
+                    done();
+                });
+        });
+    });
+
+
     describe('DELETE', () => {
         it('DELETE registered user should work', (done) => {
             let user= {
@@ -114,6 +153,20 @@ describe('app', () => {
                 .send(user)
                 .end((err, res) => {
                     res.should.have.status(204);
+                    done();
+                });
+        });
+
+        it('DELETE report should work (token)', (done) => {
+            chai.request(server)
+                .delete("/reports")
+                .set('Content-Type', 'application/json')
+                .set('x-access-token', token)
+                .send(JSON.stringify({
+                    week: 1
+                }))
+                .end((err, res) => {
+                    res.should.have.status(201);
                     done();
                 });
         });
