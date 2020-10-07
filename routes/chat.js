@@ -3,8 +3,9 @@ var express = require('express');
 var router = express.Router();
 
 const chat = require('../models/chat.js');
+// The mongo-server is local, both in development and production
 const dsn =  "mongodb://localhost:27017/chat";
-// const dsn =  "mongodb://me-api.hasselstigen.me:27017/chat";
+
 
 router.get("/", async (req, res) => {
     try {

@@ -1,6 +1,7 @@
 const mongo = require("mongodb").MongoClient;
+// The mongo-server is local, both in development and production
 const dsn = "mongodb://localhost:27017/chat";
-// const dsn = "mongodb://me-api.hasselstigen.me:27017/chat";
+
 
 const chat = {
     findInCollection: async function(dsn, collection, criteria, projection, limit) {
