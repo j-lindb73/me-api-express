@@ -9,6 +9,7 @@ const index = require('./routes/index');
 const register = require('./routes/register');
 const login = require('./routes/login');
 const reports = require('./routes/reports');
+const chat = require('./routes/chat');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -37,6 +38,7 @@ app.use('/', index);
 app.use('/register', register);
 app.use('/reports', reports);
 app.use('/login', login);
+app.use('/chat', chat);
 
 
 // Add routes for 404 and error handling

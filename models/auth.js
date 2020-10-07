@@ -197,7 +197,7 @@ const auth = {
                 return undefined;
             });
         } else {
-            console.log("ingen token");
+            // console.log("ingen token");
             return res.status(401).json({
                 errors: {
                     status: 401,
