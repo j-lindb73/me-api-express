@@ -26,3 +26,11 @@ npm run start
 
 ### Documentation
 See [Express Website](https://expressjs.com/).
+
+
+### Reset chatlog
+
+SSH to server.
+```
+me-api-express/mongodb/node setup.js
+```
