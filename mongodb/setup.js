@@ -4,7 +4,7 @@
 "use strict";
 
 const mongo = require("mongodb").MongoClient;
-const dsn =  "mongodb://me-app.hasselstigen.me:27017/chat";
+const dsn =  "mongodb://localhost:27017/chat";
 
 
 
